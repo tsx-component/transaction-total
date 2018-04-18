@@ -1,0 +1,28 @@
+.animation-total {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Dosis';
+}
+
+.animation-total h2 {
+  font-size: 24px;
+}
+
+.animation-total .digit {
+  width: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.animation-total .number {
+  font-size: 45px;
+  font-weight: 700;
+  text-align: center;
+  width: 1ch;
+}
+
+.animation-total .unit {
+  font-size: 30px;
+  font-weight: 700;
+}
