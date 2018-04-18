@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Animation.css';
 import { ICommon } from './PropsType';
-import { $, padStart } from './util';
+import { padStart } from './util';
 
 interface IState {
   el: Element | null;
@@ -40,7 +40,7 @@ export class Animation extends React.Component<ICommon, IState> {
     let start: number = 0;
     const handle = requestAnimationFrame(function nextStep(t) {
       start = start || t;
-      const progress = Math.min((t - start) / 1000, 1);
+      const progress = Math.min((t - start) / 1000, (delay || 1));
       if (prevState.el) {
         const numberEleList = prevState.el.querySelectorAll('.number');
         const numberNow = 
@@ -67,6 +67,7 @@ export class Animation extends React.Component<ICommon, IState> {
     }
   }
 
+  
   public state = {
     el: null,
     handle: 0,
@@ -74,13 +75,16 @@ export class Animation extends React.Component<ICommon, IState> {
     value: 0,
   }
 
+  private el: any;
+
   constructor(props: ICommon) {
     super(props);
   }
 
   public componentDidMount() {
+    const parentNode = this.el;
     this.setState({
-      el: $('.animation-total')
+      el: parentNode
     });
   }
 
@@ -109,7 +113,7 @@ export class Animation extends React.Component<ICommon, IState> {
     const { numArr } = this.state;
 
     return (
-      <div className="animation-total">
+      <div className="animation-total" ref={el => this.el=el}>
         {
           numArr.map((v, i) => {
             return (

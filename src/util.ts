@@ -10,10 +10,6 @@ export function omit(obj: object, fields: string[]): any {
   return shallowCopy;
 }
 
-export function $(selector: string, parentEle?: Element): Element | null {
-  return parentEle ? parentEle.querySelector(selector) : document.querySelector(selector);
-}
-
 export function padStart(v: string, l: number, str: string): string {
   str = String(str || ' ');
   if (v.length > l) {
