@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Animation.css';
 import { ICommon } from './PropsType';
-import { padStart } from './util';
+import { getLabel, hasHideLabel, padLeftNumber } from './util';
 
 interface IState {
   el: Element | null;
@@ -10,16 +10,10 @@ interface IState {
   handle?: number;
 }
 
-export function padLeftNumber(
-  value: string, length: number, fixLength?: number
-): string[] {
-  return fixLength ? padStart(value, length, '0').split('') : String(value).split('');
-}
-
 export class Animation extends React.Component<ICommon, IState> {
   public static getDerivedStateFromProps(nextProps: ICommon, prevState: IState) {
     if (typeof nextProps.value !== 'number') {
-      throw new Error('传入的value必须数字');
+      throw new Error('传入的value必须是数字类型');
     }
 
     const { value, numberPrecision, fixLength, delay } = nextProps;
@@ -92,22 +86,6 @@ export class Animation extends React.Component<ICommon, IState> {
     cancelAnimationFrame(this.state.handle);
   }
 
-  public hasHideLabel = (hasHide: boolean, length: number, index: number, numberPrecision: number | undefined) => {
-    const unitIndex = length - index - (numberPrecision ? numberPrecision + 1 : 0);
-    return !hasHide && (unitIndex === 9 || unitIndex === 5);
-  }
-
-  public getLabel = (length: number, index: number, numberPrecision: number | undefined) => {
-    const labelIndex = length - index - (numberPrecision ? numberPrecision + 1 : 0);
-    if (labelIndex === 9) {
-      return '亿';
-    } else if (labelIndex === 5) {
-      return '万';
-    } else {
-      return '';
-    }
-  }
-
   public render() {
     const { hideTag, numberPrecision } = this.props;
     const { numArr } = this.state;
@@ -120,8 +98,8 @@ export class Animation extends React.Component<ICommon, IState> {
               <div style={{display: 'flex', alignItems: 'center'}} key={i}>
                 <span className="number">{v}</span>
                 {
-                  this.hasHideLabel(hideTag, numArr.length, i, numberPrecision) &&
-                  <div className="unit">{this.getLabel(numArr.length, i, numberPrecision)}</div>
+                  hasHideLabel(hideTag, numArr.length, i, numberPrecision) &&
+                  <div className="unit">{getLabel(numArr.length, i, numberPrecision)}</div>
                 }
               </div>
             );

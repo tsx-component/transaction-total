@@ -7,5 +7,5 @@ export interface ICommon {
 }
 
 export interface IPropsType extends ICommon {
-  type: 'animation' | 'string';
+  type: 'animation' | 'card';
 }

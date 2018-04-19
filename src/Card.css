@@ -1,0 +1,116 @@
+.cart-total {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Dosis, monospace;
+}
+
+.cart-total .digit {
+  position: relative;
+  width: 46px;
+  height: 66px;
+  backface-visibility: hidden;
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 1px 3px 3px black;
+  margin: 0 3px;
+}
+
+.cart-total .item-num {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 66px;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 124%;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.cart-total .flap-top,
+.flap-top-flip,
+.flap-bottom,
+.flap-bottom-flip {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  justify-content: center;
+  overflow: hidden;
+  color: #e1e1e1;
+  background-color: #2b2b2b;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+  backface-visibility: hidden;
+}
+
+.cart-total .flap-top,
+.flap-top-flip {
+  transform: translateY(-1px);
+  top: 0;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(125deg, white -22%, #585858, #585858 55%, #333 55%, black);
+}
+
+.cart-total .flap-top .item-num {
+  top: 2px;
+}
+
+.cart-total .flap-top-flip .item-num {
+  top: 2px;
+}
+
+.cart-total .flap-bottom,
+.flap-bottom-flip {
+  transform: translateY(1px);
+  bottom: 0;
+  border-radius: 0 0 8px 8px;
+  background: linear-gradient(125deg, white -22%, #585858, #585858 20%, #333 20%, black);
+}
+
+.cart-total .flap-bottom, .item-num {
+  bottom: 0;
+}
+
+.cart-total .flap-bottom-flip .item-num {
+  bottom: 0;
+}
+
+.cart-total .flap-top-flip {
+  transform-origin: 100% 100%;
+  animation: flip-top-down 300ms ease-in;
+}
+
+.cart-total .flap-bottom-flip {
+  transform-origin: 100% 0%;
+  animation: flip-bottom-down 150ms ease-out;
+}
+
+/* Animations */
+@keyframes flip-top-down {
+  0% {
+    transform: translateY(-1px) rotateX(0);
+  }
+
+  100% {
+    transform: translateY(-1px) rotateX(-90deg);
+    color: black;
+    background-color: black;
+  }
+}
+
+@keyframes flip-bottom-down {
+  0% {
+    color: white;
+    background-color: rgb(30, 30, 30);
+    transform: translateY(1px) rotateX(90deg);
+  }
+
+  100% {
+    transform: translateY(1px) rotateX(0deg);
+  }
+}
