@@ -15,12 +15,10 @@ interface ITip {
 interface IState {
   numArr: ITip[];
   value: number;
-  preValue: number;
 }
 
 interface IIndex {
   index: number;
-  preValue: string;
   nextValue: string;
 }
 
@@ -82,31 +80,17 @@ class Card extends React.Component<ICommon, IState> {
     */
     return {
       numArr,
-      preValue: preState.value, 
       value: nextValue,
     };
   }
 
   public state = {
     numArr: [],
-    preValue: 0,
     value: 0,
   }
 
   constructor(props: ICommon) {
     super(props);
-
-    const { value, fixLength } = this.props;
-    const numArr: ITip[] = padLeftNumber(String(value), fixLength || 12, fixLength)
-      .map(v => ({
-        bottomNum: v,
-        tipBottom: false,
-        tipBottomNum: v,
-        tipTop: false,
-        tipTopNum: v,
-        topNum: v,
-      }));
-    this.state.numArr = numArr as any;
   }
 
   public render() {
